@@ -2,12 +2,20 @@
 
 namespace Mhouse\Middlewares;
 
+use Mhouse\Services\JWTservice;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
 
 class AuthMiddleware
 {
+    protected $jwtService;
+    
+    public function __construct(JWTservice $jwtService)
+    {
+        $this->jwtService = $jwtService;
+    }
+
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
         $response = new Response();
@@ -28,6 +36,8 @@ class AuthMiddleware
             return $response->withStatus(401, 'Token malformatted');
         }
 
+        // $this->jwtService->validate($token);
+
         $response = $handler->handle($request);
 
         return $response;
@@ -47,6 +57,4 @@ class AuthMiddleware
     protected function splitAuht(string $authorization) {
         return explode(' ', $authorization);
     }
-
-
 }

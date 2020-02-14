@@ -1,0 +1,35 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    container_name: nginx
+    working_dir: /app
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+      - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
+    links: 
+      - php
+  php:
+    image: multiversemkt/php-fpm-dev:latest
+    container_name: php
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+      - PHP_DATE_TIMEZONE=America/Sao_Paulo
+      - PHP_DISPLAY_ERRORS=1
+      - php.error_reporting=E_ALL
+      - RDS_HOSTNAME=db
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456

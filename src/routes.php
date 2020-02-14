@@ -14,5 +14,7 @@ $app->group('/api/v1', function(RouteCollectorProxy $group) {
     require __DIR__ . '/api_v1.php';
 })->add('AuthMiddleware');
 
+$app->get('/api/v1/signin', 'SignIn:verifyLogin');
+
 $app->addRoutingMiddleware();
 
