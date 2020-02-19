@@ -1,1 +1,4 @@
-/vendor
+/vendor/
+/app/Hydrators/
+/app/Proxies/
+/.env

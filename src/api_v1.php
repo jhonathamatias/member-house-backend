@@ -1,6 +1,6 @@
 <?php
 
-$group->post('/create', 'Mhouse\Controllers\User:create');
-$group->get('/all', 'Mhouse\Controllers\User:all');
-
-$group->get('/auth', 'User:auth');
+//Routes for users
+$group->post('/user/create', 'Mhouse\Controllers\User:create');
+$group->get('/user/auth', 'Mhouse\Controllers\User:auth');
+$group->get('/user/all', 'Mhouse\Controllers\User:all');

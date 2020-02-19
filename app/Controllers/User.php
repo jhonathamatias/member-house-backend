@@ -29,13 +29,9 @@ class User
 
     public function all(Request $request, Response $response)
     {
-        // $data = ['users' => $this->userModel->getAll()];
-        $users = $this->userModel->getAll();
+        $data = ['users' => $this->userModel->getAll()];
+        // $users = $this->userModel->getAll();
 
-        foreach ($users as $user) {
-            var_dump($user->getName());
-        }
-        exit;
         $payload = json_encode($data);
 
         $response->getBody()->write($payload);

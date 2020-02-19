@@ -1,12 +1,17 @@
 <?php
 
+use Whoops\Handler\PrettyPageHandler;
 use Zend\ConfigAggregator\ConfigAggregator;
 
 return [
     'services' => [
         'applicationConfig' => [
             'slim' => [
-                'displayErrors' => false
+                'displayErrors' => true
+            ],
+            'whoops' => [
+                'activate' => true,
+                'handler' => PrettyPageHandler::class
             ],
             'route' => [
                 'cache' => false,
