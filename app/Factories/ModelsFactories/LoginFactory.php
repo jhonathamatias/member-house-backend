@@ -4,15 +4,11 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Mhouse\Models\Login;
-use Mhouse\Models\User;
 
-class UserFactory implements FactoryInterface 
+class LoginFactory implements FactoryInterface 
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new User(
-            $container->get(DocumentManager::class),
-            $container->get(Login::class)
-        );
+        return new Login($container->get(DocumentManager::class));
     }
 }

@@ -13,6 +13,9 @@ class User
 
     /** @ODM\Field(type="string") @ODM\Index(unique=true)*/
     private $email;
+    
+    /** @ODM\ReferenceOne(targetDocument="Mhouse\Entities\Login") */
+    private $login;
 
     /** @ODM\Field(type="date") */
     private $createdAt;
@@ -32,13 +35,28 @@ class User
         $this->email = $email;
     }
 
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = date('Y-m-d H:i:s');
+    }
+
+    public function setLogin(Login $login): void
+    {
+        $this->login = $login;
+    }
+
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function setCreatedAt(): void
+    public function getEmail(): string
     {
-        $this->createdAt = date('Y-m-d H:i:s');
+        return $this->email;
+    }
+
+    public function getLogin(): Login
+    {
+        return $this->login;
     }
 }
