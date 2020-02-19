@@ -7,7 +7,7 @@ return [
     'services' => [
         'applicationConfig' => [
             'slim' => [
-                'displayErrors' => true
+                'displayErrors' => false
             ],
             'whoops' => [
                 'activate' => true,

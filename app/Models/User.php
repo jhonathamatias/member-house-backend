@@ -7,6 +7,7 @@ use Mhouse\Factories\EntitiesFactory;
 use Mhouse\Entities\User as EntitiesUser;
 
 use Mhouse\Models\Login as LoginModel;
+use Mhouse\Tools\Password;
 
 class User
 {
@@ -19,15 +20,19 @@ class User
         $this->loginModel = $loginModel;
     }
 
-    public function create(object $data): string
+    public function create(object $data)
     {
+        if ($this->getUser(['email' => $data->email]) !== null){
+            return false;
+        }
+
         $user = EntitiesFactory::get('user');
         $user->setName($data->name);
         $user->setEmail($data->email);
         $user->setCreatedAt();
 
         $login = EntitiesFactory::get('login');
-        $login->setPassword($data->password);
+        $login->setPassword(Password::create($data->password));
         $login->setUser($user);
 
         $user->setLogin($login);
@@ -39,24 +44,30 @@ class User
         return $user->getId();
     }
 
-    public function getAll()
+    public function getAll(): array
     {
         $entityUser = $this->manager->getRepository(EntitiesUser::class);
         $documents = $entityUser->findAll();
 
         $users = [];
-        $user = new \stdClass;
-
+        
         foreach($documents as $document) {
+            $user = new \stdClass;
             $user->id = $document->getId();
             $user->name = $document->getName();
             $user->email = $document->getEmail();
-            $user->password = $document->getLogin()->getPassword();
-
+            $user->createdAt = $document->getCreatedAt();
+            
             $users[] = $user;
         }
 
         return $users;
     }
     
+    public function getUser(array $criteria)
+    {
+        return $this->manager
+            ->getRepository(EntitiesUser::class)
+            ->findOneBy($criteria);
+    }
 }

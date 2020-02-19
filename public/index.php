@@ -16,6 +16,8 @@ $appConfig = $container->get('applicationConfig');
 
 require __DIR__ . '/../config/display_errors.php';
 
+require __DIR__ . '/../config/cache.config.php';
+
 require __DIR__ . '/../config/routes.php';
 
 $app->run();
