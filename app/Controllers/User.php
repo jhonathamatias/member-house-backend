@@ -18,7 +18,13 @@ class User
     {
         $post = (object)$request->getParsedBody();
 
-        $data = ['user_id' => $this->userModel->create($post)];
+        $result = $this->userModel->create($post);
+
+        if ($result === false) {
+            return $response->withStatus(500, 'User already exists');
+        }
+
+        $data = ['user_id' => $result];
 
         $payload = json_encode($data);
 
@@ -30,7 +36,6 @@ class User
     public function all(Request $request, Response $response)
     {
         $data = ['users' => $this->userModel->getAll()];
-        // $users = $this->userModel->getAll();
 
         $payload = json_encode($data);
 

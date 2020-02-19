@@ -55,6 +55,11 @@ class User
         return $this->email;
     }
 
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
     public function getLogin(): Login
     {
         return $this->login;
