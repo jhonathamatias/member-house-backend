@@ -11,3 +11,6 @@ $app->group('/api/v1', function(RouteCollectorProxy $group) {
 })->add('Mhouse\Middlewares\AuthMiddleware');
 
 $app->addRoutingMiddleware();
+
+$app->post('/api/v1/singin', 'Mhouse\Controllers\SignIn:verify');
+

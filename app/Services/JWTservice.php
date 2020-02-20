@@ -2,8 +2,6 @@
 
 namespace Mhouse\Services;
 
-
-
 class JWTservice 
 {
     const SECRET_KEY = '$2y$10$WXP0XUcixQSXsJn./7GFr.1u5CM1mDhs48RizZTwxnhVl9Ar4ufQm';
