@@ -1,0 +1,7 @@
+#!/bin/bash
+
+clear 
+
+echo "Running script in the docker container..."
+
+docker exec -it php $@
