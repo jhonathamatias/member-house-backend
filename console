@@ -1,3 +1,12 @@
 #!/bin/bash
 
-sudo docker exec -it php bin/console $@
+clear
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+bold=`tput bold`
+
+echo -e "${green}Running ${red}${bold}Member House ${reset}${green}application in the console...${reset}\n"
+
+docker exec -it php bin/console $@

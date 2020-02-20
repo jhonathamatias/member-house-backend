@@ -2,6 +2,11 @@
 
 clear 
 
-echo "Running script in the docker container..."
+blue=`tput setaf 4`
+green=`tput setaf 2`
+reset=`tput sgr0`
+bold=`tput bold`
+
+echo -e "${green}Running script in the ${blue}${bold}Docker ${reset}${green}container... ${reset} \n"
 
 docker exec -it php $@

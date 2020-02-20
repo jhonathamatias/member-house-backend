@@ -18,9 +18,9 @@ return [
                 'cacheLocal' => __DIR__ . '/../cache/routes-cache.php'
             ],
             'mongodbODM' => [
-                'proxyDir' => '../app/Proxies',
+                'proxyDir' => __DIR__ . '/../app/Proxies',
                 'proxyNamespace' => 'Mhouse\\Proxies',
-                'hydratorDir' => '../app/Hydrators',
+                'hydratorDir' => __DIR__ .'/../app/Hydrators',
                 'hydratorNamespace' => 'Mhouse\\Hydrators',
                 'defaultDB' => getenv('DB_NAME'),
                 'metadataDriverImpl' => __DIR__ . '/../app/Entities',
