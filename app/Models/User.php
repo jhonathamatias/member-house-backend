@@ -1,23 +1,20 @@
 <?php namespace Mhouse\Models;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Mhouse\Entities\Login;
+
 use Mhouse\Factories\EntitiesFactory;
 
 use Mhouse\Entities\User as EntitiesUser;
 
-use Mhouse\Models\Login as LoginModel;
 use Mhouse\Tools\Password;
 
 class User
 {
     protected $manager;
-    protected $loginModel;
 
-    public function __construct(DocumentManager $manager, LoginModel $loginModel)
+    public function __construct(DocumentManager $manager)
     {
         $this->manager = $manager;
-        $this->loginModel = $loginModel;
     }
 
     public function create(object $data)
@@ -57,6 +54,7 @@ class User
             $user->name = $document->getName();
             $user->email = $document->getEmail();
             $user->createdAt = $document->getCreatedAt();
+            $user->password = $document->getLogin()->getPassword();
             
             $users[] = $user;
         }
