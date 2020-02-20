@@ -2,3 +2,4 @@
 /app/Hydrators
 /app/Proxies
 /.env
+/composer.lock
